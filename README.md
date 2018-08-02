@@ -1,4 +1,4 @@
-# microants-blog
+# blog-node 全栈博客node服务端
 
 ## Quick Start
 
@@ -78,7 +78,7 @@ cnpm i
 npm start
 ```
 
-如果没有报错，项目就会运行在 [127.0.0.1:8080]()
+如果没有报错，项目就会运行在 [127.0.0.1:8080](http://127.0.0.1:8080)
 
 ## 目录结构
 
@@ -142,8 +142,7 @@ npm start
 收到请求（router） --> 根据路由映射调用处理函数（controller） --> 与数据库交互（service） --> 返回结果（controller）
 
 ## 生产部署
-```sh
-sudo cnpm install @microants/deploy-cli -g
 
-deploy moyu/microants-blog
+```sh
+deploy blog-node
 ```
