@@ -1,0 +1,102 @@
+============
+user
+============
+登录
+post /api/user/login
+body {
+  *name: String(10) 用户名,
+  *pass: String(16) 密码,
+}
+resp null
+
+退出登录
+post /api/user/logout
+body null
+resp null
+
+获取用户信息
+get /api/user/info
+query null 
+resp {
+  uid,
+  name,
+  password,
+  email,
+  createTime,
+}
+
+申请账号
+post /api/user/register
+body {
+  *nickname: String(10) 花名,
+  *email: String(50) 公司邮箱,
+}
+resp null
+
+更新用户信息
+get /api/user/update
+body {
+  *uid: String(10) 用户uid,
+  [key]: [value] 键值对，要更新的信息
+}
+resp {
+  uid,
+  name,
+  password,
+  email,
+  createTime,
+}
+
+
+============
+article
+============
+获取文章列表
+默认按更新时间倒序排序
+get /api/article/list
+query {
+  pageNo: int default 1 页码,
+  pageSize: int default 10 单页条数,
+  uid: int default all users 用户id,
+}
+resp [{
+  id,
+  uid,
+  title,
+  author,
+  content,
+  createTime,
+  updateTime,
+}]
+
+post /api/article/save
+body {
+  id: int(11) for create null for update 文章id
+  *title: String(50) 文章标题
+  *abstract: String(100) 文章描述
+  *cate: int(4) 分类id 
+  *content: String(20000) 文章内容
+}
+resp null
+
+get /api/article/detail
+query {
+  *id: int(11) 文章id
+}
+resp {
+  id,
+  uid,
+  title,
+  author,
+  abstract,
+  cate,
+  content,
+  createTime,
+  updateTime,
+}
+
+post /api/article/remove
+body {
+  *id: int(11) 文章id
+}
+resp null

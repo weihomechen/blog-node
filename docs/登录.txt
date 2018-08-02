@@ -1,0 +1,24 @@
+登录态维护使用session
+
+登录流程
+1、用户在界面输入用户名和密码，发起登录请求；
+2、service使用用户名和密码查询数据库
+3、如果数据库中有匹配记录
+   a、返回用户信息；
+   b、将用户信息set到session.user
+      session的setter会生成session_id，并将{session_id: user}存储到redis;
+   c、响应时取session_id放在response header set-cookie字段中
+4、如果数据库中没有匹配记录，返回：用户名不存在或密码错误
+
+登录验证
+1、用户请求页面或接口
+2、浏览器在请求头中带上cookie
+3、检查cookie中是否有session_id，如果没有，则表明未登录
+4、如果cookie中如session_id，则获取ctx.session.user
+   a、session的getter会先从cookie中取session_id
+   b、再通过session_id从redis中取user；
+   c、redis会在session超时后清除session_id对应记录
+   d、如果redis取到了user则表明在登录状态中；
+   e、如果redis取不到user则表明登录已失效；
+
+免登白名单 /config/authWhiteList.js

@@ -1,0 +1,14 @@
+<p>花名：{{ nickname }}</p>
+<p>邮箱：{{ email }} </p>
+
+<form action="{{ server }}/api/user/reject" method="post">
+  <input type="hidden" name="nickname" value="{{ nickname }}" />
+  <input type="hidden" name="email" value="{{ email }}" />
+  <input type="submit" value="拒绝" />
+</form>
+
+<form action="{{ server }}/api/user/agree" method="post">
+  <input type="hidden" name="nickname" value="{{ nickname }}" />
+  <input type="hidden" name="email" value="{{ email }}" />
+  <input type="submit" value="同意" />
+</form>
