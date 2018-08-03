@@ -1,4 +1,10 @@
-# microants-blog
+# blog-node
+
+本项目是博客全栈应用的服务端部分
+
+[前端传送门](https://github.com/weihomechen/blog)
+
+[项目预览地址](http://118.25.16.129/blog)
 
 ## Quick Start
 
@@ -78,7 +84,7 @@ cnpm i
 npm start
 ```
 
-如果没有报错，项目就会运行在 [127.0.0.1:8080]()
+如果没有报错，项目就会运行在 [127.0.0.1:8080](http://127.0.0.1:8080)
 
 ## 目录结构
 
@@ -142,8 +148,12 @@ npm start
 收到请求（router） --> 根据路由映射调用处理函数（controller） --> 与数据库交互（service） --> 返回结果（controller）
 
 ## 生产部署
-```sh
-sudo cnpm install @microants/deploy-cli -g
 
-deploy moyu/microants-blog
+需要先clone[deploy-tool](https://github.com/weihomechen/deploy-tool)到本地
+
+[deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
+
+```sh
+# 示例
+node ./bin/deploy.js -n blog-node -t /Users/weihome/my-projects/blog-node -b master -w 118.18.18.118 -d /var/proj/ -u root -p 123456 -e node
 ```
