@@ -2,9 +2,9 @@
 
 本项目是博客全栈应用的服务端部分
 
-[前端传送门](https://github.com/weihomechen/blog)
+[前端部分传送门](https://github.com/weihomechen/blog)
 
-[项目预览地址](http://118.25.16.129/blog)
+在线地址：[rulifun.cn/blog](http://rulifun.cn/blog)
 
 ## Quick Start
 
@@ -155,5 +155,5 @@ npm start
 
 ```sh
 # 示例
-node ./bin/deploy.js -n blog-node -t /Users/weihome/my-projects/blog-node -b master -w 118.18.18.118 -d /var/proj/ -u root -p 123456 -e node
+node ./bin/deploy.js -n blog-node[项目名] -t /Users/weihome/my-projects/blog-node[项目本地地址] -b master[分支] -w 118.18.18.118[服务器地址] -d /var/proj/[部署到的服务器目录] -u root[用户名] -p 123456[服务器密码] -e node[部署类型]
 ```
