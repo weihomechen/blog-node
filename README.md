@@ -12,26 +12,6 @@
 
 该项目使用了mysql，运行前请先装好mysql
 
-#### 命令行安装mysql
-
-如果没有安装homebrew先安装homebrew：
-
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-使用homebrew安装mysql：
-
-```
-brew install mysql
-```
-
-linux使用yum:
-
-```
-yum install mysql
-```
-
 #### 安装包安装mysql
 
 [mysql下载地址](https://dev.mysql.com/downloads/mysql/)，下载后跟dmg安装方法一样，一路向下，记得保存最后弹出框中的密码（它是你mysql root账号的密码）。此时只是安装成功，但还需要额外的配置：
@@ -54,6 +34,26 @@ source ~/.bash_profile
 
 现在就可以通过mysql -uroot -p登录mysql了，会让你输入密码。
 
+#### 命令行安装mysql
+
+如果没有安装homebrew先安装homebrew：
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+使用homebrew安装mysql：
+
+```
+brew install mysql
+```
+
+linux使用yum:
+
+```
+yum install mysql
+```
+
 #### 初始化数据库
 
 成功安装mysql后，在命令行执行下面这个命令自动初始化：
@@ -69,7 +69,7 @@ mysql -u[username] -p[password] < ./dbsql/db.sql
 如果是第一次初始化，可以执行总的sql文件：
 
 ```sh
-mysql -u[username] -p[password] < ./dbsql/full-db.sql
+mysql -u[username] -p[password] < ./dbsql/db-full.sql
 ```
 
 ### 开始使用
@@ -154,6 +154,9 @@ npm start
 [deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
 
 ```sh
+# 部署node项目
+node ./bin/deploy.js -n name -p pwd
+
 # 示例
-node ./bin/deploy.js -n blog-node[项目名] -t /Users/weihome/my-projects/blog-node[项目本地地址] -b master[分支] -w 118.18.18.118[服务器地址] -d /var/proj/[部署到的服务器目录] -u root[用户名] -p 123456[服务器密码] -e node[部署类型]
+node ./bin/deploy.js -n blog-node -p 123456
 ```

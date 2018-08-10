@@ -29,6 +29,6 @@
     "nodemailer": "^4.4.1",
     "password-generator": "^2.2.0",
     "stream-wormhole": "^1.0.3",
-    "uws": "^10.148.0"
+    "uws": "^10.148.1"
   }
 }
