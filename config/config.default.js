@@ -92,11 +92,12 @@ exports.bodyParser = {
 };
 
 exports.oss = {
+  // use the correct config、accessKeyId、accessKeySecret
   client: {
-    accessKeyId: 'LTAI4Sm0m8EQCGMD',
-    accessKeySecret: 'p7UBpLBuQMWuE1uX7de9IrphhP1nKN',
-    bucket: 'chenshengfu',
-    endpoint: 'oss-cn-shanghai.aliyuncs.com',
+    accessKeyId: '***',
+    accessKeySecret: '***',
+    bucket: 'rulifun',
+    endpoint: 'oss-cn-hangzhou.aliyuncs.com',
     timeout: '60s',
     secure: true,
   },
