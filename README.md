@@ -32,6 +32,15 @@
 source ~/.bash_profile
 ```
 
+如果使用第三方bash工具需要编辑相应的配置文件，比如`zsh`，需要编辑 `.zshrc` 文件:
+
+```
+vim ~/.zshrc;
+# 粘贴以下内容
+alias mysql='/usr/local/mysql/bin/mysql'
+alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
+```
+
 现在就可以通过mysql -uroot -p登录mysql了，会让你输入密码。
 
 #### 命令行安装mysql
