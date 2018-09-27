@@ -77,14 +77,14 @@ exports.whiteList = [
   '^/api/cate/list$',     // 获取分类列表
 ];
 
-exports.robotEmail = {
-  host: 'smtp.qq.com',
-  port: 587,
-  secure: false,
-  user: '3552395058@qq.com',
-  pass: 'xsuinzayxwkscjgf',
-  from: '微蚁小莉<3552395058@qq.com>',
-};
+// exports.robotEmail = {
+//   host: 'smtp.qq.com',
+//   port: 587,
+//   secure: false,
+//   user: '3552395058@qq.com',
+//   pass: 'xsuinzayxwkscjgf',
+//   from: '微蚁小莉<3552395058@qq.com>',
+// };
 
 exports.bodyParser = {
   jsonLimit: '5mb',
@@ -92,11 +92,10 @@ exports.bodyParser = {
 };
 
 exports.oss = {
-  // use the correct config、accessKeyId、accessKeySecret
   client: {
-    accessKeyId: '***',
-    accessKeySecret: '***',
-    bucket: 'rulifun',
+    accessKeyId: 'xxx',
+    accessKeySecret: 'xxx',
+    bucket: 'xxx',
     endpoint: 'oss-cn-hangzhou.aliyuncs.com',
     timeout: '60s',
     secure: true,
@@ -119,4 +118,9 @@ exports.io = {
     auth_pass: '',
     db: '6',
   },
+};
+
+exports.alinode = {
+  appid: 'xxx',
+  secret: 'xxx',
 };

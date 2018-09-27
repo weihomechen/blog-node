@@ -9,7 +9,7 @@ module.exports = app => {
 
     async save(modal, request) {
       debug(request);
-      const id = request.id;
+      const { id } = request;
       if (id) {
         // 更新分类
         const cate = await this.app.mysql.get(modal, { id });
