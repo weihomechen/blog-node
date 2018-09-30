@@ -77,14 +77,14 @@ exports.whiteList = [
   '^/api/cate/list$',     // 获取分类列表
 ];
 
-// exports.robotEmail = {
-//   host: 'smtp.qq.com',
-//   port: 587,
-//   secure: false,
-//   user: '3552395058@qq.com',
-//   pass: 'xsuinzayxwkscjgf',
-//   from: '微蚁小莉<3552395058@qq.com>',
-// };
+exports.robotEmail = {
+  host: 'smtp.qq.com',
+  port: 587,
+  secure: false,
+  user: '3552395058@qq.com',
+  pass: 'xsuinzayxwkscjgf',
+  from: 'moyu<767473010@qq.com>',
+};
 
 exports.bodyParser = {
   jsonLimit: '5mb',
@@ -93,9 +93,9 @@ exports.bodyParser = {
 
 exports.oss = {
   client: {
-    accessKeyId: 'xxx',
-    accessKeySecret: 'xxx',
-    bucket: 'xxx',
+    accessKeyId: '',
+    accessKeySecret: '',
+    bucket: 'blog-uploaded',
     endpoint: 'oss-cn-hangzhou.aliyuncs.com',
     timeout: '60s',
     secure: true,
@@ -120,7 +120,8 @@ exports.io = {
   },
 };
 
-exports.alinode = {
-  appid: 'xxx',
-  secret: 'xxx',
-};
+// alinode配置
+// exports.alinode = {
+//   appid: 'xxx',
+//   secret: 'xxx',
+// };
