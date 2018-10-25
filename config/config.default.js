@@ -1,5 +1,5 @@
 /* eslint-disable no-multi-spaces */
-import { ossConfig } from './config.private';
+const { ossConfig } = require('./config.private');
 
 exports.keys = 'znkey';
 
