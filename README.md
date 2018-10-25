@@ -171,10 +171,10 @@ npm i @ifun/deploy -g
 [deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
 
 ```sh
-# 部署前端项目
-deploy -n <name> -p <pwd> 
+# 部署node项目
+deploy -n <name>
 
 # 示例
-deploy -n blog -p 123456
+deploy -n blog-node
 ```
 

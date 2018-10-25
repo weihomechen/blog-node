@@ -1,4 +1,6 @@
 /* eslint-disable no-multi-spaces */
+import { ossConfig } from './config.private';
+
 exports.keys = 'znkey';
 
 exports.view = {
@@ -93,12 +95,11 @@ exports.bodyParser = {
 
 exports.oss = {
   client: {
-    accessKeyId: '',
-    accessKeySecret: '',
     bucket: 'blog-uploaded',
     endpoint: 'oss-cn-hangzhou.aliyuncs.com',
     timeout: '60s',
     secure: true,
+    ...ossConfig,
   },
 };
 
