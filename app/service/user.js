@@ -12,9 +12,8 @@ module.exports = app => {
     }
 
     async register(modal = 'user', params) {
-      let user = await app.mysql.get(modal, {
-        name: params.nickname,
-      });
+      const { name = params.nickname, email, password } = params;
+      let user = await app.mysql.get(modal, { name });
 
       if (user) {
         return {
@@ -25,9 +24,7 @@ module.exports = app => {
         };
       }
 
-      user = await app.mysql.get(modal, {
-        email: params.email,
-      });
+      user = await app.mysql.get(modal, { email });
 
       if (user) {
         return {
@@ -39,10 +36,10 @@ module.exports = app => {
       }
 
       const result = await this.app.mysql.insert(modal, {
-        name: params.nickname,
-        password: params.password,
+        name,
+        password,
         role: 0,
-        email: params.email,
+        email,
       });
 
       debug(result);
