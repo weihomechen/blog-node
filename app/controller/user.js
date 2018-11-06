@@ -2,11 +2,7 @@ const crypto = require('crypto');
 const generatePassword = require('password-generator');
 const { Controller } = require('egg');
 const sendToWormhole = require('stream-wormhole');
-const {
-  subObj,
-  getFileName,
-  passwordSecret,
-} = require('../utils');
+const { subObj, getFileName, passwordSecret } = require('../utils');
 
 class UserController extends Controller {
   async login() {
@@ -15,7 +11,7 @@ class UserController extends Controller {
       success: false,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     let result = {};
     const { name, password: unEncrypted } = ctx.request.body;
@@ -24,7 +20,11 @@ class UserController extends Controller {
       .createHmac('sha256', passwordSecret)
       .update(unEncrypted)
       .digest('hex');
-    if (/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(name)) {
+    if (
+      /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(
+        name
+      )
+    ) {
       result = await service.user.login('user', { email: name, password });
       if (!result.success) {
         result = await service.user.login('user', { name, password });
@@ -33,15 +33,12 @@ class UserController extends Controller {
       result = await service.user.login('user', { name, password });
     }
 
-    const {
-      user,
-      success,
-    } = result;
+    const { user, success } = result;
 
     if (success) {
       response.success = true;
       response.msg = '登录成功';
-      response.data = null;
+      response.data = { user };
       ctx.session.user = user;
     } else {
       response.success = false;
@@ -55,9 +52,7 @@ class UserController extends Controller {
   }
 
   async connect() {
-    const {
-      ctx,
-    } = this;
+    const { ctx } = this;
 
     this.app.redis.set(ctx.session.user.uid, ctx.request.body.socketId);
 
@@ -65,7 +60,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
@@ -75,9 +70,9 @@ class UserController extends Controller {
     ctx.session = null;
     ctx.body = {
       success: true,
-      msg: '',
+      msg: '退出成功',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
@@ -87,7 +82,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data: this.ctx.session.user,
+      data: this.ctx.session.user
     };
     this.ctx.status = 200;
   }
@@ -101,7 +96,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data,
+      data
     };
     ctx.status = 200;
   }
@@ -115,7 +110,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data,
+      data
     };
     ctx.status = 200;
   }
@@ -152,7 +147,7 @@ class UserController extends Controller {
         name: body.nickname,
         password,
         email: body.email,
-        role: 0,
+        role: 0
       };
 
       await service.user.create('user', userInfo);
@@ -166,7 +161,7 @@ class UserController extends Controller {
         success: false,
         msg: '没有权限',
         code: 'permission denied',
-        data: null,
+        data: null
       };
       ctx.status = 200;
     }
@@ -186,7 +181,7 @@ class UserController extends Controller {
         success: false,
         msg: '没有权限',
         code: 'permission denied',
-        data: null,
+        data: null
       };
       ctx.status = 200;
     }
@@ -199,32 +194,42 @@ class UserController extends Controller {
       success: false,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
 
-    let params = subObj(['uid', 'name', 'oldPassword', 'password', 'email', 'motto'], ctx.request.body);
+    let params = subObj(
+      ['uid', 'name', 'oldPassword', 'password', 'email', 'motto'],
+      ctx.request.body
+    );
 
     const { password: unEncrypted, oldPassword: unEncryptedOld } = params;
 
-    const password = unEncrypted && crypto
-      .createHmac('sha256', passwordSecret)
-      .update(unEncrypted)
-      .digest('hex');
+    const password =
+      unEncrypted &&
+      crypto
+        .createHmac('sha256', passwordSecret)
+        .update(unEncrypted)
+        .digest('hex');
 
-    const oldPassword = unEncryptedOld && crypto
-      .createHmac('sha256', passwordSecret)
-      .update(unEncryptedOld)
-      .digest('hex');
+    const oldPassword =
+      unEncryptedOld &&
+      crypto
+        .createHmac('sha256', passwordSecret)
+        .update(unEncryptedOld)
+        .digest('hex');
 
     if (password) {
       params = {
         ...params,
         password,
-        oldPassword,
+        oldPassword
       };
     }
 
-    const { success, user, errorMsg } = await service.user.update('user', params);
+    const { success, user, errorMsg } = await service.user.update(
+      'user',
+      params
+    );
 
     if (success) {
       response.success = true;
@@ -248,7 +253,7 @@ class UserController extends Controller {
       success: false,
       msg: '上传失败',
       code: 'upload failed',
-      data: null,
+      data: null
     };
 
     try {
@@ -265,7 +270,7 @@ class UserController extends Controller {
       const typeMap = ['avatar', 'cover', 'moneyCode'];
       const params = {
         uid,
-        [typeMap[type]]: url,
+        [typeMap[type]]: url
       };
       const { success, user } = await service.user.update('user', params);
       if (success) {
@@ -274,7 +279,7 @@ class UserController extends Controller {
           success: true,
           msg: '上传成功',
           code: 'upload success',
-          data: user,
+          data: user
         };
       } else {
         ctx.body = failRes;
@@ -288,28 +293,30 @@ class UserController extends Controller {
     const { ctx, service } = this;
 
     const team = await service.team.detail('team', {
-      tid: ctx.request.body.tid,
+      tid: ctx.request.body.tid
     });
 
     await service.message.create('message', {
       type: 1,
       title: '申请加入团队',
-      content: `${ctx.session.user.name}申请加入您的团队, 请前往 个人中心-审批管理 进行处理～`,
+      content: `${
+        ctx.session.user.name
+      }申请加入您的团队, 请前往 个人中心-审批管理 进行处理～`,
       sender: ctx.session.user.uid,
-      receiver: team.owner,
+      receiver: team.owner
     });
 
     await service.approval.create('approval', {
       title: '申请加入团队',
       applicant: ctx.session.user.uid,
-      approver: team.owner,
+      approver: team.owner
     });
 
     ctx.body = {
       success: true,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
@@ -329,7 +336,7 @@ class UserController extends Controller {
         title: '团队成员变更',
         content: `${ctx.session.user.name}已退出您的团队`,
         sender: ctx.session.user.uid,
-        receiver: owner,
+        receiver: owner
       });
     }
 
@@ -337,7 +344,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
@@ -357,7 +364,7 @@ class UserController extends Controller {
         title: '团队变更',
         content: `您已被请出${name}`,
         sender: ctx.session.user.uid,
-        receiver: uid,
+        receiver: uid
       });
     }
 
@@ -365,7 +372,7 @@ class UserController extends Controller {
       success: true,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
@@ -381,22 +388,24 @@ class UserController extends Controller {
       type: 2,
       title,
       applicant: team.owner,
-      approver: uid,
+      approver: uid
     });
 
     await service.message.create('message', {
       type: 1,
       title,
-      content: `${ctx.session.user.name}邀请您加入他的团队, 请前往 个人中心-审批管理 进行处理～`,
+      content: `${
+        ctx.session.user.name
+      }邀请您加入他的团队, 请前往 个人中心-审批管理 进行处理～`,
       sender: team.owner,
-      receiver: uid,
+      receiver: uid
     });
 
     ctx.body = {
       success: true,
       msg: '',
       code: '',
-      data: null,
+      data: null
     };
     ctx.status = 200;
   }
