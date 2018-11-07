@@ -41,7 +41,7 @@ class UserController extends Controller {
     if (success) {
       response.success = true;
       response.msg = '登录成功';
-      response.data = null;
+      response.data = { user };
       ctx.session.user = user;
     } else {
       response.success = false;
