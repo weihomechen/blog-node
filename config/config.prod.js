@@ -21,6 +21,6 @@ exports.mysql = {
 
 exports.cluster = {
   listen: {
-    port: 7003,
+    port: 7001,
   },
 };
