@@ -59,7 +59,7 @@ class TeamController extends Controller {
       await service.message.create('message', {
         type: 1,
         title: `${name}申请创建团队${teamName}`,
-        content: '需要您批准，请及时到 我的主页-审批管理 进行处理～',
+        content: '需要您批准，请及时到 个人中心-审批管理 进行处理～',
         sender: uid,
         receiver: adminUid,
       });
