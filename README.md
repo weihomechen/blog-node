@@ -2,6 +2,8 @@
 
 本项目是博客全栈应用的服务端部分
 
+[![Build Status](https://travis-ci.com/weihomechen/blog-node.svg?branch=master)](https://travis-ci.com/weihomechen/blog-node)
+
 ## 前端部分
 
 ### React实现
@@ -183,9 +185,9 @@ npm i @ifun/deploy -g
 
 ```sh
 # 部署node项目
-deploy -n <name>
+deploy app <name>
 
 # 示例
-deploy -n blog-node
+deploy app blog-node
 ```
 
