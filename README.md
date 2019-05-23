@@ -39,19 +39,18 @@
 
 此时我们在命令行输入mysql -uroot -p命令会提示没有commod not found，我们还需要将mysql加入系统环境变量。
 
-```
-// (1).进入/usr/local/mysql/bin,查看此目录下是否有mysql。
-// (2).执行vim ~/.bash_profile
-//    在该文件中添加mysql/bin的目录，即在最后一行添加下面这句话：
-//      PATH=$PATH:/usr/local/mysql/bin
-// 添加完成后，按esc，然后输入wq保存。
-// 最后在命令行输入
+```bash
+# (1).进入/usr/local/mysql/bin,查看此目录下是否有mysql。
+# (2).执行vi ~/.bash_profile, 在该文件中添加mysql/bin的目录，即在最后一行添加下面这句话：
+# PATH=$PATH:/usr/local/mysql/bin
+# 添加完成后，按esc，然后输入wq保存。
+# 最后在命令行输入
 source ~/.bash_profile
 ```
 
 如果使用第三方bash工具需要编辑相应的配置文件，比如`zsh`，需要编辑 `.zshrc` 文件:
 
-```
+```bash
 vim ~/.zshrc;
 # 粘贴以下内容
 alias mysql='/usr/local/mysql/bin/mysql'
@@ -64,7 +63,7 @@ alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
 
 如果没有安装homebrew先安装homebrew：
 
-```
+```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
@@ -82,9 +81,10 @@ yum install mysql
 
 #### 初始化数据库
 
-成功安装mysql后，在命令行执行下面这个命令自动初始化：
+成功安装`mysql`后，在命令行执行下面这个命令自动初始化：
 
 ```sh
+# cd到blog-node项目目录
 mysql -u[username] -p[password] < ./dbsql/db.sql
 ```
 
@@ -116,46 +116,57 @@ npm start
 
 ```
 ├── README.md
-├── app           // 后台部分
-├── config        // egg配置文件
-├── dispatch.js
-├── logs          // 运行日志
+├── app             // 后台部分
+│   ├── controller  // 处理业务逻辑
+│   ├── extend
+│   ├── io          // socket io
+│   ├── middleware  // 中间件
+│   ├── public      // 静态资源
+│   ├── router.js   // 服务端的路由
+│   ├── service     // 负责和数据库/其他服务器的交互
+│   ├── utils       // 工具
+│   └── view        // 页面模版
+├── config          // egg配置文件
+├── logs            // 运行日志
 ├── node_modules
 ├── package.json
 ├── run
-├── scripts      
-├── static        // 前端部分 
 ├── test
-└── db.sql    // 数据库表设计
+└── db.sql          // 数据库表设计
 ```
 
-## 前端流程
+## 前端的结构和流程
 
 ```
-├── build               // webpack配置  
-└── src
-    ├── _index.js
-    ├── components      // 通用或无状态组件
-    ├── img
-    ├── index.html
-    ├── index.js
-    ├── models          // 管理路由组件的状态
-    │   ├── app.js
-    │   └── article.js
-    ├── router.js       // 前端路由配置
-    ├── routes          // 路由组件
-    │   ├── app.js
-    │   ├── article
-    │   ├── error
-    │   └── logins
-    ├── services        // 前端和后台交互的逻辑（发起请求）
-    │   ├── app.js
-    │   └── article.js 
-    ├── tests
-    ├── theme.js
-    └── utils
+.
+├── README.md
+├── config                  // 配置文件
+│   ├── config.js           // 构建配置
+│   ├── menu.config.js      // 菜单配置
+│   ├── plugin.config.js    // 插件配置
+│   ├── project.config.js   // 项目配置
+│   └── router.config.js    // 路由配置
+├── dist              
+├── lib
+│   └── iconFont.js
+├── package-lock.json
+├── package.json
+├── src
+│   ├── app.ts              // 入口文件
+│   ├── common              // 通用代码
+│   ├── components          // 无状态组件（原则上）
+│   ├── global.css          // 全局样式
+│   ├── layouts             // 布局
+│   ├── models              // 状态管理
+│   ├── pages               // 页面路由
+│   ├── services            // 和服务端的交互
+│   └── utils               // 工具函数
+├── tsconfig.json
+├── tslint.yml
+└── typings.d.ts
 ```
-前端路由(router) --> 渲染路由组件(routes) --> 状态管理、与后台交互，发起请求(models) --> 后台对应路由配置进行处理(app) --> 返回结果 --> 前端接收后处理(models)
+
+前端路由(router) --> 渲染路由组件(routes) --> 状态管理、与后台交互，发起请求(models) --> 后台对应路由配置进行处理(app) --> 返回结果 --> 前端接收后处理(models) --> 状态的变化反应到UI上
 
 ## 后台流程
 ```
@@ -164,7 +175,7 @@ npm start
 │   └── client.js
 ├── extend
 │   └── helper.js
-├── middleware
+├── middleware      // 中间件
 ├── public
 ├── router.js       // 后台路由映射
 ├── service         // 后台和数据库交互逻辑
