@@ -104,9 +104,9 @@ exports.oss = {
 };
 
 exports.io = {
-  init: {
-    wsEngine: 'uws',
-  },
+  // init: {
+  //   wsEngine: 'uws',
+  // },
   namespace: {
     '/': {
       connectionMiddleware: ['auth'],
