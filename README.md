@@ -170,7 +170,7 @@ npm start
 
 ## 后台流程
 ```
-├── controller      // 处理对应的后台路由
+├── controller      // 后台路由对应的处理函数
 │   ├── article.js
 │   └── client.js
 ├── extend

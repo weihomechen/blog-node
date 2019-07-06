@@ -29,6 +29,7 @@
     "get-value": "^3.0.1",
     "nodemailer": "^6.2.1",
     "password-generator": "^2.2.0",
-    "stream-wormhole": "^1.0.3"
+    "stream-wormhole": "^1.0.3",
+    "ws": "^7.0.1"
   }
 }
