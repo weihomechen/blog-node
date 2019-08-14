@@ -73,9 +73,14 @@ exports.whiteList = [
   '^/api/user/info',      // 获取用户信息
   '^/api/user/login$',    // 用户登录接口
   '^/api/user/register$', // 用户注册接口
+  '^/api/user/list$',     // 用户列表
+  '^/api/user/active$',   // 活跃用户列表
+
+  '^/api/team/getList$',  // 团队列表
 
   '^/api/article/list$',  // 获取文章列表
   '^/api/article/detail', // 获取文章详情
+
   '^/api/cate/list$',     // 获取分类列表
 ];
 
