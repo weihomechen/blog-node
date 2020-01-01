@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "blog-node",
   "version": "1.2.0",
   "description": "",
   "main": "index.js",
@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "egg": "^2.1.0",
+    "egg": "^2.26.0",
     "egg-alinode": "^2.0.1",
-    "egg-bin": "^4.3.3",
+    "egg-bin": "^4.14.0",
     "egg-cors": "^2.2.0",
     "egg-mysql": "^3.0.0",
     "egg-onerror": "^2.1.0",
