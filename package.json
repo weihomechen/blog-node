@@ -27,7 +27,7 @@
     "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.0.0",
     "get-value": "^3.0.1",
-    "nodemailer": "^6.2.1",
+    "nodemailer": "^6.4.16",
     "password-generator": "^2.2.0",
     "stream-wormhole": "^1.0.3",
     "ws": "^7.0.1"
